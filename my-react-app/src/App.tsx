@@ -1,7 +1,15 @@
 import { useState } from 'react'
+import axios from 'axios';
+
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const fetchAPI = async() => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    const data = await response.json()
+    console.log(data)
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
