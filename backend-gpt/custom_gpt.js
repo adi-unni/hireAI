@@ -1,10 +1,11 @@
+import 'dotenv/config';
 import { OpenAI } from '@langchain/openai';
 import fs from 'fs';
 import express from 'express';
 import cors from 'cors';
 
-// Read API key from secret.key file
-const apiKey = fs.readFileSync('secret.key', 'utf8').trim();
+// Read API key from environment variable
+const apiKey = process.env.OPENAI_API_KEY;
 
 //Noww start the express server so that we can use it as an API to communicate with the frontend
 const app = express();
