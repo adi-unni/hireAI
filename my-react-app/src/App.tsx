@@ -21,9 +21,11 @@ const App: React.FC = () => {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-            Recruitment Tool
-          </h1>
+        <h1 className="text-5xl font-extrabold text-center text-blue-600 mb-8 tracking-wide">
+  <span className="text-gray-800">Hire</span>
+  <span className="text-blue-600">AI</span>
+</h1>
+
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6">
             {/* Define routes for each page */}
             <Routes>
