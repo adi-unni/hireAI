@@ -8,6 +8,7 @@ import Instructions from './hireai/Instructions';
 import Prompt from './hireai/Prompt';
 import Summary from './hireai/Summary';
 import Test from './hireai/Test';
+import Login from './hireai/Login';
 
   const fetchAPI = async() => {
     const response = await fetch('https://jsonplaceholder.typicode.com/todos/1')
@@ -29,10 +30,11 @@ const App: React.FC = () => {
           <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6">
             {/* Define routes for each page */}
             <Routes>
-              <Route path="/" element={<Instructions />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/instructions" element={<Instructions />} />
               <Route path="/questions" element={<Prompt />} />
-              <Route path="/recall-test" element={<Summary />} />
-              <Route path="/summary" element={<Test />} />
+              <Route path="/test" element={<Test />} />
+              <Route path="/summary" element={<Summary />} />
             </Routes>
           </div>
         </div>
