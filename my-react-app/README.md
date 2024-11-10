@@ -1,11 +1,42 @@
-# React + TypeScript + Vite
+# HireAI - Human Insights and Recruitment Evaluator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HireAI is an interactive platform designed to evaluate candidate insights, recall, and analytical abilities using AI-driven assessments. This project uses React, TypeScript, Vite, and LangChain's OpenAI API to deliver a smooth and responsive experience for candidates and assessors.
 
-Currently, two official plugins are available:
+# Project Setup
+This project uses Vite for fast refresh and modern development, and it integrates with an Express server for backend interactions with the OpenAI API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Prerequisites
+- Node.js (v14 or higher recommended)
+- npm
+
+# Local Development
+
+To run this project locally, follow these steps:
+
+- Clone the Repository
+
+```
+git clone https://github.com/yourusername/HireAI.git
+cd HireAI
+```
+
+- Install Dependencies:
+```
+npm install
+```
+
+- Set Up Environment Variables:
+Create a .env file in the root directory and add your OpenAI API key and other environment variables.
+```
+OPENAI_API_KEY=your_openai_api_key
+```
+
+- Run servers
+Run the ports 3000 and 5173 by running
+```
+npm run dev
+```
+
 
 ## Expanding the ESLint configuration
 
