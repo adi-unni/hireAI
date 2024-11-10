@@ -63,13 +63,12 @@ const Prompt: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <div className="bg-white shadow-md p-6 text-center">
-        <h1 className="text-4xl font-extrabold text-gray-800 mb-2">HireAI</h1>
-        <p className="text-lg font-medium text-blue-600">{content}</p>
+      <div className="bg-white shadow-md p-6 max-w-4xl text-center">
+        <p className="text-lm font-medium text-blue-600">{content || "Loading context... Please wait."}</p>
       </div>
 
       <div className="flex-1 overflow-auto p-4">
-        <div className="max-w-2xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {questions.map((question, index) => (
             <div key={index} className="flex flex-col space-y-2">
               {/* User Question - Align Right */}

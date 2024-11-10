@@ -31,7 +31,7 @@ const Test: React.FC = () => {
   };
 
   return (
-    <div className="text-left max-w-2xl mx-auto p-4">
+    <div className="text-left max-w-3xl mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4 text-center">Test</h2>
       <p className="mb-4 text-center">Answer the following True/False questions based on the topic you just studied:</p>
 

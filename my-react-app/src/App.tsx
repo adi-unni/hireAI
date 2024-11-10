@@ -45,7 +45,7 @@ function App() {
         <div className="container mx-auto px-4 py-8">
           {/* Render the Header component which includes conditional rendering */}
           <Header />
-          <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl p-6">
+          <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-4xl p-6">
             {/* Define routes for each page */}
             <Routes>
               <Route path="/login" element={isAuthenticated ? <Navigate to="/instructions" /> : <Login />} />
