@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Test: React.FC = () => {
   const questions = [
@@ -13,6 +14,7 @@ const Test: React.FC = () => {
   ];
 
   const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
+  const navigate = useNavigate();
 
   const handleAnswerChange = (index: number, response: string) => {
     const newAnswers = [...answers];
@@ -23,6 +25,9 @@ const Test: React.FC = () => {
   const handleSubmit = () => {
     console.log("Submitted answers:", answers);
     // Optionally send answers to the backend here
+
+    // Navigate to the Summary page
+    navigate('/summary', { state: { answers } });
   };
 
   return (
