@@ -15,7 +15,7 @@ app.use(cors());
 // Initialize the OpenAI LLM with your API key
 const llm = new OpenAI({
   openAIApiKey: apiKey,
-  modelName: 'gpt-3.5-turbo',
+  modelName: 'gpt-4o-mini',
 });
 
 let response = '';
@@ -23,10 +23,31 @@ let questions = [];
 let score = '';
 let user_asked_questions = [];
 
+const historicalTopics = [
+    "The Fall of the Roman Empire",
+    "The Industrial Revolution",
+    "The Renaissance Period",
+    "The French Revolution",
+    "The American Civil War",
+    "The Age of Exploration",
+    "The Scientific Revolution",
+    "The Rise and Fall of Ancient Egypt",
+    "The Silk Road Trade Routes",
+    "The Medieval Crusades"
+];
+
+function getRandomTopic() {
+    const randomIndex = Math.floor(Math.random() * historicalTopics.length);
+    const selectedTopic = historicalTopics[randomIndex];
+    return selectedTopic;   
+}
+
+
 // Convert to async function to handle content generation
 async function generateContent() {
-    response = await llm.call('Create a concise yet informative overview on the topic of {topic}. The response should provide a well-rounded understanding, covering the key aspects of the subject while remaining succinct. Include relevant historical examples and brief annotations that illustrate these points effectively. Ensure that the tone is educational and engages readers with clarity and precision, aiming for a response within (desired word count, e.g., 150-200 words).');
-    const questionsString = await llm.call(`Generate 8 True/False questions based on the content provided. The questions should test the reader's comprehension and analytical thinking by exploring inferences, implications, or related facts. Ensure that the questions are not direct statements from the content but are logically derived from the information provided. Format each question clearly, using the following template for consistency:
+    const topic = getRandomTopic();
+    response = await llm.call(`Create a concise yet informative overview on the topic of "${topic}". The response should provide a well-rounded understanding, covering the key aspects of the subject while remaining succinct. Include relevant historical examples throught out the human history and brief annotations that illustrate these points effectively. Ensure that the tone is educational and engages readers with clarity and precision, aiming for a response within (desired word count, e.g., 80-100 words).`);
+    const questionsString = await llm.call(`Generate 8 True/False questions based on the "${topic}". The questions should test the reader's comprehension and analytical thinking by exploring inferences, implications, or related facts. Ensure that the questions are not direct statements from the content but are logically derived from the information provided. Format each question clearly, using the following template for consistency:
 
     Q1: [True/False question statement]
     Q2: [True/False question statement]

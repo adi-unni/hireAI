@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Test: React.FC = () => {
-  const questions = [
-    "The Berlin Wall was erected to protect East Germany from foreign influence.",
-    "The fall of the Berlin Wall marked the end of the Cold War.",
-    "The Berlin Wall separated East and West Berlin.",
-    "The Berlin Wall was demolished in 1989.",
-    "The Berlin Wall was built to keep East Germans from defecting to the West.",
-    "The fall of the Berlin Wall led to the reunification of Germany.",
-    "The Berlin Wall was originally built in 1961.",
-    "The Berlin Wall was a symbol of division between the Soviet Union and the Western world."
-  ];
-
-  const [answers, setAnswers] = useState<(string | null)[]>(Array(questions.length).fill(null));
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [answers, setAnswers] = useState<(string | null)[]>([]);
   const navigate = useNavigate();
+
+  // Fetch questions when component mounts
+  useEffect(() => {
+    fetch('http://localhost:3000/generate')
+      .then(res => res.json())
+      .then(data => {
+        setQuestions(data.questions);
+        setAnswers(Array(data.questions.length).fill(null));
+      })
+      .catch(err => console.error('Error fetching questions:', err));
+  }, []);
 
   const handleAnswerChange = (index: number, response: string) => {
     const newAnswers = [...answers];
@@ -22,12 +23,22 @@ const Test: React.FC = () => {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
-    console.log("Submitted answers:", answers);
-    // Optionally send answers to the backend here
-
-    // Navigate to the Summary page
-    navigate('/summary', { state: { answers } });
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/score', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answers }),
+      });
+      
+      const data = await response.json();
+      // Navigate to summary page with the score data
+      navigate('/summary', { state: { score: data.score } });
+    } catch (error) {
+      console.error('Error submitting answers:', error);
+    }
   };
 
   return (
@@ -36,8 +47,8 @@ const Test: React.FC = () => {
       <p className="mb-4 text-center">Answer the following True/False questions based on the topic you just studied:</p>
 
       {questions.map((question, index) => (
-        <div key={index} className="mb-6">
-          <p className="text-lg font-medium mb-2">{question}</p>
+        <div key={question.id} className="mb-6">
+          <p className="text-lg font-medium mb-2">{question.question}</p>
           <div className="flex flex-col space-y-2 pl-4">
             <label className="flex items-center space-x-2">
               <input
