@@ -2,6 +2,10 @@
 
 HireAI is an interactive platform designed to evaluate candidate insights, recall, and analytical abilities using AI-driven assessments. This project uses React, TypeScript, Vite, and LangChain's OpenAI API to deliver a smooth and responsive experience for candidates and assessors.
 
+# Project Definition
+
+The project allows a candidate to authorise themselves using Auth0 to start their assessment. Based on a project topic, selected from a time travel theme of events in the past, a candidate has to query GPT to gain further insight into the topic. GPT (set with a low temperature and a complex model) will make deterministic judgements into a candidates ability to deduce information, evaluate recall and process higher-order thinking through our number question styles. A report (which is intended for the hiring managers), created through streamlit, is then made available to the candidate so they can see how they performed on the question types and a measure of their learning ability.
+
 # Project Setup
 This project uses Vite for fast refresh and modern development, and it integrates with an Express server for backend interactions with the OpenAI API.
 
