@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 from utils.data_processor import DataProcessor
+from datetime import datetime, timedelta
 
 
 def main():
@@ -71,6 +72,36 @@ def main():
     }
     df_scores = pd.DataFrame(scores)
     st.table(df_scores)
+
+    # 6. Latest Test Results
+    st.header("6. Latest Test Results")
+    
+    # Fetch the most recent test results
+    latest_test = data_processor.fetch_latest_test()
+    
+    if latest_test:
+        st.subheader("Test Summary")
+        
+        # Display test timestamp
+        st.write(f"Test completed: {latest_test['timestamp']}")
+        
+        # Create a DataFrame for the test results
+        test_df = pd.DataFrame({
+            'Question': latest_test['questions'],
+            'Answer': latest_test['answers']
+        })
+        
+        # Display results in a table
+        st.table(test_df)
+        
+        # Calculate and display score
+        correct_answers = len([a for a in latest_test['answers'] if a == 'True'])
+        total_questions = len(latest_test['questions'])
+        score = (correct_answers / total_questions) * 100
+        
+        st.metric("Test Score", f"{score:.1f}%")
+    else:
+        st.write("No test results available yet.")
 
 if __name__ == "__main__":
     main() 

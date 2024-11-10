@@ -6,16 +6,39 @@ const Prompt: React.FC = () => {
   const [responses, setResponses] = useState<string[]>([]);
   const [input, setInput] = useState('');
   const [countdown, setCountdown] = useState<number | null>(null);
+  const [content, setContent] = useState<string>('');
   const navigate = useNavigate();
 
   const historicalEvent = "The fall of the Berlin Wall in 1989 marked a significant event in history, symbolizing the end of the Cold War and the reunification of Germany.";
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    fetch('http://localhost:3000/generate')
+      .then(res => res.json())
+      .then(data => {
+        setContent(data.content);
+      })
+      .catch(err => console.error('Error fetching content:', err));
+  }, []);
+
+  const handleSubmit = async () => {
     if (input.trim() && questions.length < 3) {
       setQuestions([...questions, input]);
-      const newResponse = `This is a response from GPT based on your question: "${input}"`;
-      setResponses([...responses, newResponse]);
-      setInput('');
+      
+      try {
+        const response = await fetch('http://localhost:3000/answer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ question: input }),
+        });
+        
+        const data = await response.json();
+        setResponses([...responses, data.answer]);
+        setInput('');
+      } catch (error) {
+        console.error('Error getting answer:', error);
+      }
     }
   };
 
@@ -42,7 +65,7 @@ const Prompt: React.FC = () => {
     <div className="min-h-screen flex flex-col bg-gray-100">
       <div className="bg-white shadow-md p-6 text-center">
         <h1 className="text-4xl font-extrabold text-gray-800 mb-2">HireAI</h1>
-        <p className="text-lg font-medium text-blue-600">{historicalEvent}</p>
+        <p className="text-lg font-medium text-blue-600">{content}</p>
       </div>
 
       <div className="flex-1 overflow-auto p-4">
