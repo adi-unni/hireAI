@@ -1,35 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Summary: React.FC = () => {
-  const [answer, setAnswer] = useState<string | null>(null);
+  
 
-  const handleAnswer = (response: string) => {
-    setAnswer(response);
-    // Optionally send the answer to backend here
+  const handleViewReport = () => {
+    window.open('http://10.205.228.19:8501', '_blank');
   };
 
   return (
-    <div className="text-center">
-      <h2 className="text-2xl font-semibold mb-4">Recall Test</h2>
-      <p className="mb-4">Answer the following question:</p>
-      <p className="text-lg font-medium mb-4">
-        True or False: The Berlin Wall was erected to protect East Germany from foreign influence.
-      </p>
-      <div className="flex justify-center space-x-4">
+    <div className="items-center justify-center bg-white-100 text-center px-4">
+      <div className="bg-white">
+        <br></br>
+        <h2 className="text-3xl font-semibold mb-4 text-blue-600">Thank You for Your Response!</h2>
+        <p className="text-lg font-medium mb-4 text-gray-800">Check your feedback report below.</p>
+
         <button
-          onClick={() => handleAnswer('True')}
-          className={`px-4 py-2 rounded ${answer === 'True' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          onClick={handleViewReport}
+          className="mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
         >
-          True
-        </button>
-        <button
-          onClick={() => handleAnswer('False')}
-          className={`px-4 py-2 rounded ${answer === 'False' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-        >
-          False
+          View Feedback Report
         </button>
       </div>
-      {answer && <p className="mt-4">Your answer: {answer}</p>}
     </div>
   );
 };

@@ -48,12 +48,14 @@ const Prompt: React.FC = () => {
       <div className="flex-1 overflow-auto p-4">
         <div className="max-w-2xl mx-auto space-y-4">
           {questions.map((question, index) => (
-            <div key={index} className="flex flex-col">
-              <div className="self-start bg-blue-100 text-gray-800 p-3 rounded-lg mb-2 max-w-xs">
+            <div key={index} className="flex flex-col space-y-2">
+              {/* User Question - Align Right */}
+              <div className="self-end bg-blue-100 text-gray-800 p-3 rounded-lg max-w-xs">
                 <p><strong>You:</strong> {question}</p>
               </div>
+              {/* GPT Response - Align Left */}
               {responses[index] && (
-                <div className="self-end bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
+                <div className="self-start bg-gray-200 text-gray-800 p-3 rounded-lg max-w-xs">
                   <p><strong>GPT:</strong> {responses[index]}</p>
                 </div>
               )}
