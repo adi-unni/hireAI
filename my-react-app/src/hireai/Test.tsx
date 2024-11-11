@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Test: React.FC = () => {
+  interface Question {
+    id: string;
+    question: string;
+  }
+
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<(string | null)[]>([]);
   const navigate = useNavigate();
@@ -43,14 +48,14 @@ const Test: React.FC = () => {
 
   return (
     <div className="text-left max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4 text-center">Test</h2>
-      <p className="mb-4 text-center">Answer the following True/False questions based on the topic you just studied:</p>
+      <h2 className="text-2xl font-semibold mb-4 text-center text-gray-800">Test</h2>
+      <p className="mb-4 text-center text-gray-700">Answer the following True/False questions based on the topic you just studied:</p>
 
       {questions.map((question, index) => (
         <div key={question.id} className="mb-6">
-          <p className="text-lg font-medium mb-2">{question.question}</p>
+          <p className="text-lg font-medium mb-2 text-gray-800">{question.question}</p>
           <div className="flex flex-col space-y-2 pl-4">
-            <label className="flex items-center space-x-2">
+            <label className="flex items-center space-x-2 text-gray-700">
               <input
                 type="radio"
                 name={`question-${index}`}
@@ -60,7 +65,7 @@ const Test: React.FC = () => {
               />
               <span>True</span>
             </label>
-            <label className="flex items-center space-x-2">
+            <label className="flex items-center space-x-2 text-gray-700">
               <input
                 type="radio"
                 name={`question-${index}`}

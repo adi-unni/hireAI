@@ -25,15 +25,6 @@ let user_asked_questions = [];
 
 const historicalTopics = [
     "The Fall of the Roman Empire",
-    "The Industrial Revolution",
-    "The Renaissance Period",
-    "The French Revolution",
-    "The American Civil War",
-    "The Age of Exploration",
-    "The Scientific Revolution",
-    "The Rise and Fall of Ancient Egypt",
-    "The Silk Road Trade Routes",
-    "The Medieval Crusades"
 ];
 
 function getRandomTopic() {
@@ -144,7 +135,15 @@ app.post('/score', async (req, res) => {
           Feedback: [Feedback]`);
         
         score = parseScoreResponse(scoreText);
-        res.json({ score });
+        
+        // Add timestamp to the response
+        const scoreWithMetadata = {
+            ...score,
+            timestamp: new Date().toISOString(),
+            content: response
+        };
+        
+        res.json({ score: scoreWithMetadata });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

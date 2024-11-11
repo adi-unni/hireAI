@@ -17,11 +17,11 @@ const Instructions: React.FC = () => {
 
       {/* Main Content Box */}
      
-        <h3 className="text-2xl font-semibold mb-4">Instructions</h3>
-        <p className="mb-4">Welcome to the HireAI!</p>
-        <p>Follow the instructions below to complete your assessment:</p>
+        <h3 className="text-2xl font-semibold mb-4 text-gray-800">Instructions</h3>
+        <p className="mb-4 text-gray-700">Welcome to the HireAI!</p>
+        <p className="text-gray-700">Follow the instructions below to complete your assessment:</p>
         <br />
-        <ul className="list-disc list-inside text-left mb-4">
+        <ul className="list-disc list-inside text-left mb-4 text-gray-700">
           <li>Read the information carefully and ask relevant questions. The information can be from any period in time. <b>Note: You will only be allowed to type in 3 prompts</b></li>
           <li>You will be given 10 minutes after your last prompt to go through all the questions and answers.</li>
           <li>After 10 minutes you will automatically be redirected to the test page. Complete the test by answering True/False questions.</li>

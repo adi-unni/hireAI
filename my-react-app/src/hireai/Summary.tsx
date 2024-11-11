@@ -4,7 +4,7 @@ const Summary: React.FC = () => {
   
 
   const handleViewReport = () => {
-    window.open('http://10.205.228.19:8501', '_blank');
+    window.open('http://192.168.100.204:8501', '_blank');
   };
 
   return (

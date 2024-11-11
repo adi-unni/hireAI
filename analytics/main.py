@@ -51,11 +51,14 @@ def main():
     st.plotly_chart(fig_timeline, use_container_width=True)
 
     # 4. Topic Distribution
-    st.header("4. Topic Distribution")
-    topic_dist = pd.Series(metrics['topic_distribution'])
-    fig_topics = px.pie(values=topic_dist.values,
-                       names=topic_dist.index,
-                       title='Topic Distribution')
+    st.header("4. Question Category Distribution")
+    topic_dist = pd.Series(metrics['category_distribution'])
+    fig_topics = px.bar(
+        x=topic_dist.index,
+        y=topic_dist.values,
+        labels={'x': 'Question Category', 'y': 'Count'},
+        title='Distribution of Question Categories'
+    )
     st.plotly_chart(fig_topics)
 
     # 5. Detailed Assessment
@@ -101,7 +104,52 @@ def main():
         
         st.metric("Test Score", f"{score:.1f}%")
     else:
-        st.write("No test results available yet.")
+        st.subheader("Sample Test Results")
+        
+        # Create sample test data
+        sample_test = {
+            'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'questions': [
+                "Q1",
+                "Q2",
+                "Q3",
+                "Q4",
+                "Q5",
+                "Q6",
+                "Q7",
+                "Q8"
+            ],
+            'answers': [
+                'True',
+                'False',
+                'False',
+                'True',
+                'False',
+                'True',
+                'False',
+                'True'
+            ]
+        }
+        
+        st.write(f"Test completed: {sample_test['timestamp']}")
+        
+        # Create a DataFrame for the sample test results
+        sample_df = pd.DataFrame({
+            'Question': sample_test['questions'],
+            'Answer': sample_test['answers']
+        })
+        
+        # Display sample results in a table
+        st.table(sample_df)
+        
+        # Calculate and display sample score
+        correct_sample = len([a for a in sample_test['answers'] if a == 'True'])
+        total_sample = len(sample_test['questions'])
+        sample_score = (correct_sample / total_sample) * 100
+        
+        st.metric("Sample Test Score", f"{sample_score:.1f}%")
+        
+        # st.info("⚠️ This is sample data. Real test results will appear here after completing an assessment.")
 
 if __name__ == "__main__":
     main() 
