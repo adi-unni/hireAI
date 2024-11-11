@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const Test: React.FC = () => {
   interface Question {
@@ -30,7 +31,7 @@ const Test: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/score', {
+      const response = await fetch(`${API_URL}/score`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
