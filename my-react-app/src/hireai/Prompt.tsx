@@ -9,8 +9,6 @@ const Prompt: React.FC = () => {
   const [content, setContent] = useState<string>('');
   const navigate = useNavigate();
 
-  const historicalEvent = "The fall of the Berlin Wall in 1989 marked a significant event in history, symbolizing the end of the Cold War and the reunification of Germany.";
-
   useEffect(() => {
     fetch('http://localhost:3000/generate')
       .then(res => res.json())
